@@ -4,30 +4,30 @@ import javaExceptions.mainTask.exceptions.WrongGradeException;
 import javaExceptions.mainTask.featuredCategories.Lessons;
 
 public class Lesson {
-    private Lessons lessonName;
-    private int lessonMark;
+    private Lessons name;
+    private int mark;
 
     public Lesson(Lessons lessons, int mark) {
-        this.lessonName = lessons;
-        this.lessonMark = mark;
-        if ((lessonMark < 0) || (lessonMark > 10)) {
+        this.name = lessons;
+        this.mark = mark;
+        if ((this.mark < 0) || (this.mark > 10)) {
             throw new WrongGradeException("Student's mark should be in 0-10 range");
         }
     }
 
-    public int getLessonMark() {
-        return lessonMark;
+    public int getMark() {
+        return mark;
     }
 
-    public Lessons getLessonName() {
-        return lessonName;
+    public Lessons getName() {
+        return name;
     }
 
     @Override
     public String toString() {
         return "Lesson{" +
-                "lessonName=" + lessonName +
-                ", lessonMark=" + lessonMark +
+                "lessonName=" + name +
+                ", lessonMark=" + mark +
                 '}';
     }
 }

@@ -2,8 +2,8 @@ package javaExceptions.mainTask.exceptions;
 
 import java.util.NoSuchElementException;
 
-public class LackOfGroupException extends NoSuchElementException {
-     public LackOfGroupException(String s) {
+public class WrongGroupException extends NoSuchElementException {
+     public WrongGroupException(String s) {
         super(s);
     }
 }

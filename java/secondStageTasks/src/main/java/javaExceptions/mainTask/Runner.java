@@ -38,7 +38,7 @@ public class Runner {
                 ))
         ));
         engeneeringGroups.add(en22);
-        Faculty engeeniring = new Faculty(Faculties.ENGENEERING, engeneeringGroups);
+        Faculty engeeniring = new Faculty(Faculties.ENGINEERING, engeneeringGroups);
         //Mathematical
         Group ay11 = new Group("AY-11", Arrays.asList(
                 new Student("Иванов", "Иван", "Иванович", Arrays.asList(
@@ -53,11 +53,11 @@ public class Runner {
         mathematicalGroups.add(ay11);
         Group ay21 = new Group("AY-21", Arrays.asList(
                 new Student("Кожемякин", "Владислав", "Павлович", Arrays.asList(
-                        new Lesson(Lessons.ALGOROTHMIZATION, 10),
+                        new Lesson(Lessons.ALGORITHMIZATION, 10),
                         new Lesson(Lessons.ENGLISH_LANGUAGE, 10)
                 )),
                 new Student("Кожемякин", "Владислав", "Сергеевич", Arrays.asList(
-                        new Lesson(Lessons.ALGOROTHMIZATION, 3),
+                        new Lesson(Lessons.ALGORITHMIZATION, 3),
                         new Lesson(Lessons.ENGLISH_LANGUAGE, 3)
                 ))
         ));
@@ -66,11 +66,11 @@ public class Runner {
         //IT
         Group pk12 = new Group("PK-12", Arrays.asList(
                 new Student("Козлов", "Максим", "Петрович", Arrays.asList(
-                        new Lesson(Lessons.ALGOROTHMIZATION, 6),
+                        new Lesson(Lessons.ALGORITHMIZATION, 6),
                         new Lesson(Lessons.MATHS, 6)
                 )),
                 new Student("Козлов", "Максим", "Геннадьевич", Arrays.asList(
-                        new Lesson(Lessons.MATHS.ALGOROTHMIZATION, 7),
+                        new Lesson(Lessons.MATHS.ALGORITHMIZATION, 7),
                         new Lesson(Lessons.MATHS, 7)
                 ))
         ));
@@ -86,24 +86,14 @@ public class Runner {
                         new Lesson(Lessons.LAW, 10),
                         new Lesson(Lessons.PROGRAMMING, 3)
                 ))
-
         ));
         itGroups.add(pk22);
-
-       /* List<Group> testGroup = new ArrayList<>();
-        Group test = new Group("test", Arrays.asList());
-        testGroup.add(test);
-        */
-        //Faculty test = new Faculty(Faculties.ENGENEERING,null);
-        //University testU = new University(null);
-
         Faculty it = new Faculty(Faculties.IT, itGroups);
         List<Faculty> facultyList = new ArrayList<>();
         facultyList.add(engeeniring);
         facultyList.add(mathematical);
         facultyList.add(it);
         University mIU = new University(facultyList);
-
         //Средний балл по всем предметам студента
        System.out.println(mIU.getStudentAverageMark("Поддубный", "Сергей", "Степанович"));
        //Средний бал по конкретному предмету в конкретной группе и факультете

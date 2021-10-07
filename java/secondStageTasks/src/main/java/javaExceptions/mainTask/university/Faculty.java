@@ -1,39 +1,39 @@
 package javaExceptions.mainTask.university;
 
-import javaExceptions.mainTask.exceptions.LackOfGroupException;
+import javaExceptions.mainTask.exceptions.WrongGroupException;
 import javaExceptions.mainTask.featuredCategories.Faculties;
 
 import java.util.List;
 
 public class Faculty {
-    private Faculties facultyName;
-    private List<Group> groupList;
+    private Faculties name;
+    private List<Group> groupsList;
 
     public Faculty(Faculties facultyName, List<Group> groupList) {
-        this.facultyName = facultyName;
-        this.groupList = groupList;
+        this.name = facultyName;
+        this.groupsList = groupList;
         try {
             if (groupList.isEmpty()) {
-                throw new LackOfGroupException("Faculty must have at least 1 group");
+                throw new WrongGroupException("Faculty must have at least 1 group");
             }
         } catch (Exception e) {
-            throw new LackOfGroupException("Faculty must have at least 1 group");
+            throw new WrongGroupException("Faculty must have at least 1 group");
         }
     }
 
-    public Faculties getFacultyName() {
-        return facultyName;
+    public Faculties getName() {
+        return name;
     }
 
-    public List<Group> getGroupList() {
-        return groupList;
+    public List<Group> getGroupsList() {
+        return groupsList;
     }
 
     @Override
     public String toString() {
         return "Faculty{" +
-                "facultyName=" + facultyName +
-                ", groupList=" + groupList +
+                "facultyName=" + name +
+                ", groupList=" + groupsList +
                 '}';
     }
 }

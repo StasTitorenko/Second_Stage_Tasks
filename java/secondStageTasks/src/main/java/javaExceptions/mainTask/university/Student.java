@@ -1,51 +1,51 @@
 package javaExceptions.mainTask.university;
 
-import javaExceptions.mainTask.exceptions.LackOfLessonException;
+import javaExceptions.mainTask.exceptions.WrongLessonException;
 
 import java.util.List;
 
 public class Student {
-    private String studentName;
-    private String studentSurname;
-    private String studentPatronymic;
-    private List<Lesson> lessonList;
+    private String name;
+    private String surname;
+    private String patronymic;
+    private List<Lesson> lessonsList;
 
     public Student(String studentName, String studentSurname, String studentPatronymic, List<Lesson> lessonList) {
-        this.studentName = studentName;
-        this.studentSurname = studentSurname;
-        this.studentPatronymic = studentPatronymic;
-        this.lessonList = lessonList;
+        this.name = studentName;
+        this.surname = studentSurname;
+        this.patronymic = studentPatronymic;
+        this.lessonsList = lessonList;
         if (lessonList.isEmpty()){
-            throw new LackOfLessonException("Student must have at least 1 lesson");
+            throw new WrongLessonException("Student must have at least 1 lesson");
         }
     }
 
-    public List<Lesson> getLessonList() {
-        return lessonList;
+    public List<Lesson> getLessonsList() {
+        return lessonsList;
     }
 
     public double getStudentAverageMarks(){
-        return (lessonList.stream().mapToDouble(o-> o.getLessonMark()).sum()) / lessonList.size();
+        return (lessonsList.stream().mapToDouble(o-> o.getMark()).sum()) / lessonsList.size();
     }
-    public String getStudentName() {
-        return studentName;
-    }
-
-    public String getStudentSurname() {
-        return studentSurname;
+    public String getName() {
+        return name;
     }
 
-    public String getStudentPatronymic() {
-        return studentPatronymic;
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getPatronymic() {
+        return patronymic;
     }
 
     @Override
     public String toString() {
         return "Student{" +
-                "studentName='" + studentName + '\'' +
-                ", studentSurname='" + studentSurname + '\'' +
-                ", studentPatronymic='" + studentPatronymic + '\'' +
-                ", lessonList=" + lessonList +
+                "studentName='" + name + '\'' +
+                ", studentSurname='" + surname + '\'' +
+                ", studentPatronymic='" + patronymic + '\'' +
+                ", lessonList=" + lessonsList +
                 '}';
     }
 }
