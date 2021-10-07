@@ -12,8 +12,12 @@ public class University {
 
     public University(List<Faculty> facultyList) {
         this.facultyList = facultyList;
-        if (facultyList.isEmpty()) {
-            throw new LackOfFacultyException("The university must have at least 1 faculty");
+        try {
+            if (facultyList.isEmpty()) {
+                throw new LackOfFacultyException("University must have at least 1 faculty");
+            }
+        } catch (Exception e) {
+            throw new LackOfFacultyException("University must have at least 1 faculty");
         }
     }
 
@@ -27,6 +31,7 @@ public class University {
                 .collect(Collectors.toList());
     return foundStudent;
     }
+
     public List<Lesson> findLessonInGroupInFaculty(Lessons lessonName, String groupName, Faculties facultyName){
         List<Lesson> foundLesson = facultyList.stream()
                 .filter(faculty -> faculty.getFacultyName().equals(facultyName))

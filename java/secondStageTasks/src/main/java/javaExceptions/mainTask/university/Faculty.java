@@ -1,6 +1,5 @@
 package javaExceptions.mainTask.university;
 
-import javaExceptions.mainTask.exceptions.LackOfFacultyException;
 import javaExceptions.mainTask.exceptions.LackOfGroupException;
 import javaExceptions.mainTask.featuredCategories.Faculties;
 

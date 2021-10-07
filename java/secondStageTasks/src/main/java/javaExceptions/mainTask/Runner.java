@@ -86,8 +86,17 @@ public class Runner {
                         new Lesson(Lessons.LAW, 10),
                         new Lesson(Lessons.PROGRAMMING, 3)
                 ))
+
         ));
         itGroups.add(pk22);
+
+       /* List<Group> testGroup = new ArrayList<>();
+        Group test = new Group("test", Arrays.asList());
+        testGroup.add(test);
+        */
+        //Faculty test = new Faculty(Faculties.ENGENEERING,null);
+        //University testU = new University(null);
+
         Faculty it = new Faculty(Faculties.IT, itGroups);
         List<Faculty> facultyList = new ArrayList<>();
         facultyList.add(engeeniring);
