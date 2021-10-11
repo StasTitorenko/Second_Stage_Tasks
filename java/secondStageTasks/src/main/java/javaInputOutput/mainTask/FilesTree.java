@@ -64,10 +64,10 @@ public class FilesTree {
                         .map(elem -> elem.substring(0, (elem.length() - 4)))
                         .mapToInt(String::length)
                         .sum();
-                System.out.println("Количество папок=" + numberOfFolders);
-                System.out.println("Количество файлов=" + numberOfFiles);
-                System.out.println("Среднее количество файлов в папке=" + (double) numberOfFiles / (double) numberOfFolders);
-                System.out.println("Средняя длинна названия файла=" + (double) averageFileNameLength / (double) numberOfFiles);
+                System.out.println("Number of folders=" + numberOfFolders);
+                System.out.println("Number of files=" + numberOfFiles);
+                System.out.println("Average number of files in folders=" + (double) numberOfFiles / (double) numberOfFolders);
+                System.out.println("Average length of file name=" + (double) averageFileNameLength / (double) numberOfFiles);
             }
         }
         catch (Exception e){
