@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SecondOptionalTask {
@@ -21,8 +22,9 @@ public class SecondOptionalTask {
             throw  new RuntimeException("Can't write file");
         }
     }
+
     public static List<String> scanStrings(File inputFile){
-        List<String> inputList = null;
+        List<String> inputList = new ArrayList<>();
         try {
             inputList = Files.readAllLines(Paths.get(inputFile.getAbsolutePath()));
         } catch (Exception e) {
@@ -30,7 +32,8 @@ public class SecondOptionalTask {
         }
         return inputList;
     }
-    public static void reverseStrings(List inputList, File outputFile){
+
+    public static void reverseStrings(List<String> inputList, File outputFile){
         for (Object o : inputList) {
             String beforeReplace = o.toString();
             String[] words = beforeReplace.split(" ");

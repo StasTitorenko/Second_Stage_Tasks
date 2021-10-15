@@ -6,38 +6,38 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class FilesTree {
+
+    static String folderIndent = "|-----";
+    static String fileIndent = "|_____";
+    static int indentNumber = 0;
+
     public static void getTreeListOfDirectory(File loadedFile)  {
         File[] file = loadedFile.listFiles();
         if (file != null) {
             for (File files : file) {
                 if (files.isDirectory()) {
-                    System.out.println("|-----" + files.getName());
-                    writeFile("|-----" + files.getName());
-                    new FilesTree().getTreeOfTreeListOfDirectory(files);
+                    indentNumber++;
+                    folderIndent = folderIndent.concat("-----");
+                    fileIndent = fileIndent.concat("_____");
+                    System.out.println(folderIndent + files.getName());
+                    writeFile(folderIndent + files.getName());
+                    getTreeListOfDirectory(files);
                 } else {
-                    System.out.println("|_" + files.getName());
-                    writeFile("|_" + files.getName());
+                    if (indentNumber == 0){
+                        System.out.println("|_"+ files.getName());
+                        writeFile("|_" + files.getName());
+                    } else {
+                        System.out.println(fileIndent + files.getName());
+                        writeFile(fileIndent + files.getName());
+                    }
                 }
             }
+            folderIndent = folderIndent.substring(0,folderIndent.length()-5);
+            fileIndent = fileIndent.substring(0,fileIndent.length()-5);
+            indentNumber--;
         }
     }
-    public static void getTreeOfTreeListOfDirectory(File loadedFile)  {
-        File[] file = loadedFile.listFiles();
 
-        if (file != null) {
-            for (File files : file) {
-                if (files.isDirectory()) {
-                    System.out.println("|----------" + files.getName());
-                   writeFile("|----------" + files.getName());
-                    new FilesTree().getTreeOfTreeListOfDirectory(files);
-                } else {
-                    System.out.println("|__________"+ files.getName());
-                    writeFile("|__________" + files.getName());
-                }
-            }
-        }
-
-    }
     public static void  writeFile(String str)  {
         try (FileWriter writer = new FileWriter("data/output.txt",true)) {
             writer.write(str +"\n");
@@ -45,8 +45,8 @@ public class FilesTree {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
+
     public static void main(String[] args)  {
         File temp = new File("data/output.txt");
         temp.delete();
@@ -58,16 +58,16 @@ public class FilesTree {
                 List<String> file = Files.readAllLines(Paths.get(path.getAbsolutePath()));
                 int numberOfFolders = (int) file.stream().filter(folders -> folders.contains("|-")).count();
                 int numberOfFiles = (int) file.stream().filter(files -> files.contains("|_")).count();
-                int averageFileNameLength = file.stream().filter(files -> files.contains("|_"))
-                        .map(elem -> elem.replaceAll("|", ""))
+                int averageFileNameLength =file.stream().filter(files -> files.contains("|_"))
                         .map(elem -> elem.replaceAll("_", ""))
-                        .map(elem -> elem.substring(0, (elem.length() - 4)))
+                        .map(elem -> elem.substring(1, (elem.length() - 4)))
                         .mapToInt(String::length)
                         .sum();
                 System.out.println("Number of folders=" + numberOfFolders);
                 System.out.println("Number of files=" + numberOfFiles);
-                System.out.println("Average number of files in folders=" + (double) numberOfFiles / (double) numberOfFolders);
-                System.out.println("Average length of file name=" + (double) averageFileNameLength / (double) numberOfFiles);
+                System.out.print("Average number of files in folders=");
+                System.out.printf("%.2f", ((double) (numberOfFiles) /  numberOfFolders));
+                System.out.println("\nAverage length of file name=" + (double) averageFileNameLength / (double) numberOfFiles);
             }
         }
         catch (Exception e){

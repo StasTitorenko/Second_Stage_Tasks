@@ -19,6 +19,7 @@ public class FirstOptionalTask {
             throw  new RuntimeException("Can't write file");
         }
     }
+
     public static int[] scanArray(File fileToScan){
         int[] array = new int[100];
         try(Scanner scanner = new Scanner(fileToScan)){
@@ -30,6 +31,7 @@ public class FirstOptionalTask {
         }
         return array;
     }
+
     public static void main(String[] args) {
         File outputText = new File(pathToDirectory,fileName);
         File folder = new File(pathToDirectory);
@@ -52,6 +54,5 @@ public class FirstOptionalTask {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
     }
 }
