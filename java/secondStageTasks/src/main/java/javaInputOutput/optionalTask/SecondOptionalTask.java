@@ -14,16 +14,16 @@ public class SecondOptionalTask {
     final static String fileInputName = "secondTaskInput.txt";
     final static String fileOutputName = "secondTaskOutput.txt";
 
-    public static void writeFile(File fileToWrite,String stringToWrite){
-        try(FileWriter writer = new FileWriter(fileToWrite,true)){
+    public static void writeFile(File fileToWrite, String stringToWrite) {
+        try (FileWriter writer = new FileWriter(fileToWrite, true)) {
             writer.write(stringToWrite);
             writer.write("\n");
-        }catch (IOException e) {
-            throw  new RuntimeException("Can't write file");
+        } catch (IOException e) {
+            throw new RuntimeException("Can't write file");
         }
     }
 
-    public static List<String> scanStrings(File inputFile){
+    public static List<String> scanStrings(File inputFile) {
         List<String> inputList = new ArrayList<>();
         try {
             inputList = Files.readAllLines(Paths.get(inputFile.getAbsolutePath()));
@@ -33,10 +33,9 @@ public class SecondOptionalTask {
         return inputList;
     }
 
-    public static void reverseStrings(List<String> inputList, File outputFile){
-        for (Object o : inputList) {
-            String beforeReplace = o.toString();
-            String[] words = beforeReplace.split(" ");
+    public static void reverseStrings(List<String> inputList, File outputFile) {
+        for (String fileList : inputList) {
+            String[] words = fileList.split(" ");
             String firstWord = words[0];
             words[0] = words[words.length - 1];
             words[words.length - 1] = firstWord;
@@ -49,6 +48,6 @@ public class SecondOptionalTask {
         File inputFile = new File(pathToDirectory, fileInputName);
         File outputFile = new File(pathToDirectory, fileOutputName);
         outputFile.delete();
-        reverseStrings(scanStrings(inputFile),outputFile);
+        reverseStrings(scanStrings(inputFile), outputFile);
     }
 }

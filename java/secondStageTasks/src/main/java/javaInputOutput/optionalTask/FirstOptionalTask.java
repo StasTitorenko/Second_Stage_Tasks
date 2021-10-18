@@ -10,21 +10,22 @@ public class FirstOptionalTask {
 
     final static String pathToDirectory = "data/firstOptionalTask";
     final static String fileName = "firstTask.txt";
+    final static int numberOfRandomItems = 100;
 
-    public static void writeFile(File fileToWrite,String stringToWrite){
-        try(FileWriter writer = new FileWriter(fileToWrite,true)){
+    public static void writeFile(File fileToWrite, String stringToWrite) {
+        try (FileWriter writer = new FileWriter(fileToWrite, true)) {
             writer.write(stringToWrite);
             writer.write("\n");
-        }catch (IOException e) {
-            throw  new RuntimeException("Can't write file");
+        } catch (IOException e) {
+            throw new RuntimeException("Can't write file");
         }
     }
 
-    public static int[] scanArray(File fileToScan){
-        int[] array = new int[100];
-        try(Scanner scanner = new Scanner(fileToScan)){
-            for (int i = 0; i < 100; i++){
-            array[i] = scanner.nextInt();
+    public static int[] scanArray(File fileToScan) {
+        int[] array = new int[numberOfRandomItems];
+        try (Scanner scanner = new Scanner(fileToScan)) {
+            for (int i = 0; i < numberOfRandomItems; i++) {
+                array[i] = scanner.nextInt();
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't read array");
@@ -33,7 +34,7 @@ public class FirstOptionalTask {
     }
 
     public static void main(String[] args) {
-        File outputText = new File(pathToDirectory,fileName);
+        File outputText = new File(pathToDirectory, fileName);
         File folder = new File(pathToDirectory);
         if (outputText.exists()) {
             outputText.delete();
@@ -42,14 +43,14 @@ public class FirstOptionalTask {
         }
         try {
             outputText.createNewFile();
-            for (int i = 0; i < 100; i++){
-                writeFile(outputText,String.valueOf((int)(Math.random() * 100)));
+            for (int i = 0; i < numberOfRandomItems; i++) {
+                writeFile(outputText, String.valueOf((int) (Math.random() * 100)));
             }
             int[] array = scanArray(outputText);
             Arrays.sort(array);
             outputText.delete();
-            for (int i = 0; i < 100; i++){
-                writeFile(outputText,String.valueOf(array[i]));
+            for (int i = 0; i < numberOfRandomItems; i++) {
+                writeFile(outputText, String.valueOf(array[i]));
             }
         } catch (IOException ex) {
             ex.printStackTrace();
