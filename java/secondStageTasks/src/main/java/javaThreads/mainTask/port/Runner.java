@@ -1,7 +1,7 @@
 package javaThreads.mainTask.port;
 
 public class Runner {
-    synchronized public static void main(String[] args) {
+    public static void main(String[] args) {
         Port port = new Port(3, 1500, 1300);
         new Ship(port, "Alpha", 500, 200).start();
         new Ship(port, "Beta", 500, 200).start();
