@@ -25,7 +25,7 @@ public class Port extends Thread {
         this.currentNumberOfContainers = currentNumberOfContainers;
     }
 
-    void goToDock() {
+    void moorToDock() {
         try {
             docks.acquire();
         } catch (InterruptedException e) {

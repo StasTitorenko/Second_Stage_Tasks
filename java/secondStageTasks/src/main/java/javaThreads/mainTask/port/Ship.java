@@ -66,7 +66,7 @@ public class Ship extends Thread {
         int randomChoiceOfAction = (int) (1 + Math.random() * 2);
         int timeSpentAtDock = (int) (1000 + Math.random() * 10000);
         System.out.println(message + " arrived to the port");
-        port.goToDock();
+        port.moorToDock();
         System.out.println(message + " is docking");
         if (randomChoiceOfAction == 1) {
             unloadContainersFromShipToDock(message, timeSpentAtDock);
@@ -75,6 +75,5 @@ public class Ship extends Thread {
         }
         port.leaveDock();
         System.out.println(message + " leave dock");
-
     }
 }
