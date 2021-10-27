@@ -1,6 +1,6 @@
 package iCanWin.test;
 
-import iCanWin.pages.PastebinHomePage;
+import iCanWin.pages.HomePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -26,15 +26,15 @@ public class ICanWin {
     }
 
     @Test(description = "Check new paste creation")
-    public void checkNewPasteCreation() {
-        String expectedPaste = new PastebinHomePage(driver, wait, actions)
+    public void comparePasteResult() {
+        String expectedPaste = new HomePage(driver, wait, actions)
                 .openPage()
                 .enterPaste()
                 .setPasteExpiration()
                 .setPasteName()
                 .createNewPaste()
-                .checkOfCreateNewPaste();
-        Assert.assertEquals(expectedPaste, "Hello from WebDriver", "Your Paste is empty");
+                .getNewPasteText();
+        Assert.assertEquals(expectedPaste, "Hello from WebDriver", "Your Paste is wrong");
     }
 
     @AfterMethod(alwaysRun = true)

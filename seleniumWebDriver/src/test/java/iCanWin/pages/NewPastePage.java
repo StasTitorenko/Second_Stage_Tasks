@@ -7,15 +7,15 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class PastebinAddNewPastePage extends AbstractPage {
+public class NewPastePage extends AbstractPage {
     @FindBy(xpath = "//*[@class='textarea']")
     WebElement resultData;
 
-    public PastebinAddNewPastePage(WebDriver driver, WebDriverWait wait, Actions actions) {
+    public NewPastePage(WebDriver driver, WebDriverWait wait, Actions actions) {
         super(driver, wait, actions);
     }
 
-    public String checkOfCreateNewPaste() {
+    public String getNewPasteText() {
         wait.until(ExpectedConditions.visibilityOf(resultData));
         return resultData.getText();
     }

@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class PastebinHomePage extends AbstractPage {
+public class HomePage extends AbstractPage {
     private static final String HOMEPAGE_URL = "https://pastebin.com";
     private static final String PASTE = "Hello from WebDriver";
     private static final String PASTE_NAME = "helloweb";
@@ -27,22 +27,22 @@ public class PastebinHomePage extends AbstractPage {
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement btnCreateNewPaste;
 
-    public PastebinHomePage(WebDriver driver, WebDriverWait wait, Actions actions) {
+    public HomePage(WebDriver driver, WebDriverWait wait, Actions actions) {
         super(driver, wait, actions);
     }
 
-    public PastebinHomePage openPage() {
+    public HomePage openPage() {
         driver.get(HOMEPAGE_URL);
         wait.until(ExpectedConditions.visibilityOf(btnCreateNewPaste));
         return this;
     }
 
-    public PastebinHomePage enterPaste() {
+    public HomePage enterPaste() {
         textField.sendKeys(PASTE);
         return this;
     }
 
-    public PastebinHomePage setPasteExpiration() {
+    public HomePage setPasteExpiration() {
         actions.moveToElement(btnCreateNewPaste).perform();
         wait.until(ExpectedConditions.elementToBeClickable(pasteExpirationContainer));
         pasteExpirationContainer.click();
@@ -50,13 +50,13 @@ public class PastebinHomePage extends AbstractPage {
         return this;
     }
 
-    public PastebinHomePage setPasteName() {
+    public HomePage setPasteName() {
         pasteName.sendKeys(PASTE_NAME);
         return this;
     }
 
-    public PastebinAddNewPastePage createNewPaste() {
+    public NewPastePage createNewPaste() {
         btnCreateNewPaste.submit();
-        return new PastebinAddNewPastePage(driver, wait, actions);
+        return new NewPastePage(driver, wait, actions);
     }
 }
