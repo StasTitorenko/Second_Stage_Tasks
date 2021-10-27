@@ -1,0 +1,4 @@
+Hello, what is your name?
+Hi, my name is stas!
+How are you Stas?
+I'm fine thanks
