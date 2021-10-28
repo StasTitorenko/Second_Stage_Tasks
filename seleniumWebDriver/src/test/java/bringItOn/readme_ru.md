@@ -3,8 +3,8 @@
 
 Открыть https://pastebin.com  или аналогичный сервис в любом браузере
 Создать New Paste со следующими деталями:
-* Код:
 
+* Код:
 git config --global user.name  "New Sheriff in Town"
 git reset $(git commit-tree HEAD^{tree} -m "Legacy code")
 git push origin master --force
