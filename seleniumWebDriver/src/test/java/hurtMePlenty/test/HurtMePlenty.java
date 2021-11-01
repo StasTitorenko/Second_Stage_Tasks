@@ -26,9 +26,9 @@ public class HurtMePlenty {
                 .openPage()
                 .clickSearchButton()
                 .inputSearchQuery()
-                .followCalculatorPage()
+                .goToCalculatorPage()
                 .frameSwitch()
-                .choiceChapter()
+                .selectChapter()
                 .setNumberOfInstances()
                 .setOperatingSystem()
                 .setMachineClass()
@@ -40,50 +40,50 @@ public class HurtMePlenty {
                 .setNumberOfSSD()
                 .setDataCenter()
                 .setCommittedUsage()
-                .pressResultsButton();
+                .clickResultsButton();
     }
 
-    @Test(description = "Compare Number Of Instances")
+    @Test(description = "Compare Number Of Instances obtained from the site with the given one")
     public void compareNumberOfInstance() {
         Assert.assertTrue(calculatorResultsPage.getNumberOfInstances().contains("4"), "Number of instances are not 4");
     }
 
-    @Test(description = "Compare Region")
+    @Test(description = "Compare Region obtained from the site with the given one")
     public void compareRegion() {
         Assert.assertTrue(calculatorResultsPage.getRegion().contains("Iowa"), "Region is not Iowa");
     }
 
-    @Test(description = "Compare Commitment Term")
+    @Test(description = "Compare Commitment Term obtained from the site with the given one")
     public void compareCommitmentTerm() {
         Assert.assertTrue(calculatorResultsPage.getCommitmentTerm().contains("1 Year"), "Committed term is not 1 year");
     }
 
-    @Test(description = "Compare VM Class")
+    @Test(description = "Compare VM Class obtained from the site with the given one")
     public void compareVMClass() {
         Assert.assertTrue(calculatorResultsPage.getVMClass().contains("regular"), "VM class is not regular");
     }
 
-    @Test(description = "Compare Instance type")
+    @Test(description = "Compare Instance type obtained from the site with the given one")
     public void compareInstanceType() {
         Assert.assertTrue(calculatorResultsPage.getInstanceType().contains("n1-standard-8"), "Instance type is not n1-standard-8");
     }
 
-    @Test(description = "Compare Operation System")
+    @Test(description = "Compare Operation System obtained from the site with the given one")
     public void compareOperationSystem() {
         Assert.assertEquals(calculatorResultsPage.getOperationSystem(), "Operating System / Software: Free", "Number of instance are not equals");
     }
 
-    @Test(description = "Compare GPU")
+    @Test(description = "Compare GPU obtained from the site with the given one")
     public void compareGPU() {
         Assert.assertTrue(calculatorResultsPage.getGPU().contains("1 NVIDIA TESLA V100"), "GPU is not 1x NVIDIA TESLA V100");
     }
 
-    @Test(description = "Compare SSD")
+    @Test(description = "Compare SSD obtained from the site with the given one")
     public void compareSSD() {
         Assert.assertTrue(calculatorResultsPage.getSSD().contains("2x375 GiB"), "SSD is not 2x375 GiB");
     }
 
-    @Test(description = "Compare Total cost")
+    @Test(description = "Compare Total cost obtained from the site with the given one")
     public void compareTotalCost() {
         Assert.assertTrue(calculatorResultsPage.getTotalCost().contains("USD 5,413.06 per 1 month"), "Cost is not USD 5,413.06 per 1 month");
     }

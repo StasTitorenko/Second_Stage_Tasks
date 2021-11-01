@@ -1,4 +1,4 @@
-package hurtMePlenty.pages;
+package hardcore.pages;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class CalculatorPage extends AbstractPage {
+public class PricingCalculatorPage extends AbstractPage {
     JavascriptExecutor executor = (JavascriptExecutor) driver;
 
     @FindBy(xpath = "//*[@id='cloud-site']/*/*")
@@ -79,88 +79,88 @@ public class CalculatorPage extends AbstractPage {
     @FindBy(xpath = "//button[contains(@ng-click,'ComputeEngineForm')]")
     private WebElement resultsButton;
 
-    public CalculatorPage(WebDriver driver, WebDriverWait wait) {
+    public PricingCalculatorPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
 
-    public CalculatorPage frameSwitch() {
+    public PricingCalculatorPage frameSwitch() {
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(mainFrame));
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("myFrame"));
         computeEngineButton.click();
         return this;
     }
 
-    public CalculatorPage selectChapter() {
+    public PricingCalculatorPage selectChapter() {
         computeEngineButton.click();
         return this;
     }
 
-    public CalculatorPage setNumberOfInstances() {
+    public PricingCalculatorPage setNumberOfInstances() {
         numberOfInstancesField.sendKeys("4");
         return this;
     }
 
-    public CalculatorPage setOperatingSystem() {
+    public PricingCalculatorPage setOperatingSystem() {
         executor.executeScript("arguments[0].click(), arguments[1].click()",
                 operationSystemContainer, operationSystem);
         return this;
     }
 
-    public CalculatorPage setMachineClass() {
+    public PricingCalculatorPage setMachineClass() {
         executor.executeScript("arguments[0].click(), arguments[1].click()",
                 machineClassContainer, machineClass);
         return this;
     }
 
-    public CalculatorPage setMachineSeries() {
+    public PricingCalculatorPage setMachineSeries() {
         executor.executeScript("arguments[0].click(), arguments[1].click()",
                 seriesContainer, series);
         return this;
     }
 
-    public CalculatorPage setMachineType() {
+    public PricingCalculatorPage setMachineType() {
         executor.executeScript("arguments[0].click(), arguments[1].click()",
                 machineTypeContainer, machineType);
         return this;
     }
 
-    public CalculatorPage addGpus() {
+    public PricingCalculatorPage addGpus() {
         executor.executeScript("arguments[0].click()", gpuCheckBox);
         return this;
     }
 
-    public CalculatorPage setNumberOfGpus() {
+    public PricingCalculatorPage setNumberOfGpus() {
         executor.executeScript("arguments[0].click(), arguments[1].click()",
                 numberOfGpuContainer, numberOfGpu);
         return this;
     }
 
-    public CalculatorPage setGpuType() {
+    public PricingCalculatorPage setGpuType() {
         executor.executeScript("arguments[0].click(), arguments[1].click()",
                 gpuTypeContainer, gpuType);
         return this;
     }
 
-    public CalculatorPage setNumberOfSSD() {
+    public PricingCalculatorPage setNumberOfSSD() {
         executor.executeScript("arguments[0].click(), arguments[1].click()",
                 localSSDContainer, localSSD);
         return this;
     }
 
-    public CalculatorPage setDataCenter() {
+    public PricingCalculatorPage setDataCenter() {
         executor.executeScript("arguments[0].click(), arguments[1].click()",
                 dataCenterContainer, dataCenter);
         return this;
     }
 
-    public CalculatorPage setCommittedUsage() {
+    public PricingCalculatorPage setCommittedUsage() {
         executor.executeScript("arguments[0].click(), arguments[1].click()",
                 committedUsageContainer, committedUsage);
         return this;
     }
 
-    public CalculatorResultsPage clickResultsButton() {
+    public PricingCalculatorResultsPage clickResultsButton() {
         executor.executeScript("arguments[0].click()", resultsButton);
-        return new CalculatorResultsPage(driver, wait);
+        return new PricingCalculatorResultsPage(driver, wait);
     }
 }
