@@ -15,7 +15,7 @@ public class NewPastePage extends AbstractPage {
         super(driver, wait, actions);
     }
 
-    public String getNewPasteText() {
+    public String getNewPasteCode() {
         wait.until(ExpectedConditions.visibilityOf(resultData));
         return resultData.getText();
     }

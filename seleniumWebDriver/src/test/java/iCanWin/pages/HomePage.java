@@ -1,5 +1,7 @@
 package iCanWin.pages;
 
+import iCanWin.featuredCategories.PasteExpiration;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -8,21 +10,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage extends AbstractPage {
-    private static final String HOMEPAGE_URL = "https://pastebin.com";
-    private static final String PASTE = "Hello from WebDriver";
-    private static final String PASTE_NAME = "helloweb";
-
     @FindBy(id = "postform-text")
     private WebElement textField;
 
     @FindBy(id = "select2-postform-expiration-container")
     private WebElement pasteExpirationContainer;
 
-    @FindBy(xpath = "//*[@class='select2-results__option' and text()='10 Minutes']")
-    private WebElement pasteExpiration;
-
     @FindBy(id = "postform-name")
-    private WebElement pasteName;
+    private WebElement pasteNameField;
 
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement btnCreateNewPaste;
@@ -31,27 +26,30 @@ public class HomePage extends AbstractPage {
         super(driver, wait, actions);
     }
 
-    public HomePage openPage() {
-        driver.get(HOMEPAGE_URL);
+    public HomePage openPage(String homepageURL) {
+        driver.get(homepageURL);
         wait.until(ExpectedConditions.visibilityOf(btnCreateNewPaste));
         return this;
     }
 
-    public HomePage enterPaste() {
-        textField.sendKeys(PASTE);
+    public HomePage enterPaste(String pasteCode) {
+        textField.sendKeys(pasteCode);
         return this;
     }
 
-    public HomePage setPasteExpiration() {
+    public HomePage setPasteExpiration(PasteExpiration pasteExpiration) {
         actions.moveToElement(btnCreateNewPaste).perform();
         wait.until(ExpectedConditions.elementToBeClickable(pasteExpirationContainer));
         pasteExpirationContainer.click();
-        pasteExpiration.click();
+        String pasteLocator = String.format("//*[@class='select2-results__option' and text()='%s']",
+                pasteExpiration);
+        driver.findElement(By.xpath(pasteLocator)).click();
+
         return this;
     }
 
-    public HomePage setPasteName() {
-        pasteName.sendKeys(PASTE_NAME);
+    public HomePage setPasteName(String pasteName) {
+        pasteNameField.sendKeys(pasteName);
         return this;
     }
 
