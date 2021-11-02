@@ -1,5 +1,8 @@
 package bringItOn.pages;
 
+import bringItOn.featuredCategories.PasteExpiration;
+import bringItOn.featuredCategories.SyntaxHighlighting;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -8,30 +11,17 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage extends AbstractPage {
-    private static final String HOMEPAGE_URL = "https://pastebin.com";
-    private static final String PASTE = """
-            git config --global user.name  "New Sheriff in Town"
-            git reset $(git commit-tree HEAD^{tree} -m "Legacy code")
-            git push origin master --force""";
-    private static final String PASTE_NAME = "how to gain dominance among developers";
+    @FindBy(id = "select2-postform-format-container")
+    private WebElement syntaxHighlightingContainer;
 
     @FindBy(id = "postform-text")
     private WebElement textField;
 
-    @FindBy(id = "select2-postform-format-container")
-    private WebElement syntaxHighlightingContainer;
-
-    @FindBy(xpath = "//*[@class='select2-results__option' and text()='Bash']")
-    private WebElement syntaxHighlighting;
-
     @FindBy(id = "select2-postform-expiration-container")
     private WebElement pasteExpirationContainer;
 
-    @FindBy(xpath = "//*[@class='select2-results__option' and text()='10 Minutes']")
-    private WebElement pasteExpiration;
-
     @FindBy(id = "postform-name")
-    private WebElement pasteName;
+    private WebElement pasteNameField;
 
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement btnCreateNewPaste;
@@ -40,41 +30,38 @@ public class HomePage extends AbstractPage {
         super(driver, wait, actions);
     }
 
-    public static String getPASTE() {
-        return PASTE;
-    }
-
-    public static String getPasteName() {
-        return PASTE_NAME;
-    }
-
-    public HomePage openPage() {
-        driver.get(HOMEPAGE_URL);
+    public HomePage openPage(String homepageURL) {
+        driver.get(homepageURL);
         wait.until(ExpectedConditions.visibilityOf(btnCreateNewPaste));
         return this;
     }
 
-    public HomePage enterPaste() {
-        textField.sendKeys(PASTE);
+    public HomePage enterPaste(String pasteCode) {
+        textField.sendKeys(pasteCode);
         return this;
     }
 
-    public HomePage setSyntaxHighlighting() {
+    public HomePage moveToSyntaxHighlightingContainerAndClickIt() {
         actions.moveToElement(btnCreateNewPaste).perform();
-        wait.until(ExpectedConditions.elementToBeClickable(syntaxHighlightingContainer));
         syntaxHighlightingContainer.click();
-        syntaxHighlighting.click();
         return this;
     }
 
-    public HomePage setPasteExpiration() {
+    public HomePage moveToPasteExpirationContainerAndClickIt() {
+        actions.moveToElement(btnCreateNewPaste).perform();
         pasteExpirationContainer.click();
-        pasteExpiration.click();
         return this;
     }
 
-    public HomePage setPasteName() {
-        pasteName.sendKeys(PASTE_NAME);
+    public HomePage setContainerValue(String value) {
+        String locator = String.format("//*[@class='select2-results__option' and text()='%s']",
+                value);
+        driver.findElement(By.xpath(locator)).click();
+        return this;
+    }
+
+    public HomePage setPasteName(String pasteName) {
+        pasteNameField.sendKeys(pasteName);
         return this;
     }
 

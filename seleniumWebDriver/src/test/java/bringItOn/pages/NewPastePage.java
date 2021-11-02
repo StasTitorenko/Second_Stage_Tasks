@@ -14,7 +14,7 @@ public class NewPastePage extends AbstractPage{
     @FindBy(xpath = "//div[@class='left']/*")
     private WebElement pasteSyntax;
 
-    @FindBy(xpath = "//*[@class='textarea']")
+    @FindBy(xpath = "//textarea")
     private WebElement resultData;
 
     public NewPastePage(WebDriver driver, WebDriverWait wait, Actions actions) {
@@ -26,11 +26,11 @@ public class NewPastePage extends AbstractPage{
         return pasteName.getText();
     }
 
-    public boolean checkNewPasteSyntax() {
-        return pasteSyntax.getText().contains("Bash");
+    public String getNewPasteSyntax() {
+        return pasteSyntax.getText();
     }
 
-    public String getNewPasteText() {
+    public String getNewPasteCode() {
         return resultData.getText();
     }
 }

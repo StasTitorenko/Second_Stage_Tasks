@@ -40,9 +40,9 @@ public class ICanWin {
                 .createNewPaste();
     }
 
-    @Test(description = "Comparison of the paste received from the site and the given one")
-    public void comparePasteResult() {
-        Assert.assertEquals(newPastePage.getNewPasteCode(), PASTE_CODE, "Pastes are not equal");
+    @Test(description = "Comparison of the paste code received from the site and the given one")
+    public void comparePasteCode() {
+        Assert.assertEquals(newPastePage.getNewPasteCode(), PASTE_CODE, "Pastas code are not equal");
     }
 
     @AfterClass(alwaysRun = true)
