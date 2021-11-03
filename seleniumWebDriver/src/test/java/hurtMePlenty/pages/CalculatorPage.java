@@ -1,5 +1,7 @@
 package hurtMePlenty.pages;
 
+import hurtMePlenty.featuredCategories.*;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,13 +10,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CalculatorPage extends AbstractPage {
-    JavascriptExecutor executor = (JavascriptExecutor) driver;
-
     @FindBy(xpath = "//*[@id='cloud-site']/*/*")
     private WebElement mainFrame;
-
-    @FindBy(xpath = "//div[@class='name ng-binding' and contains(text(),'Compute Engine')]")
-    private WebElement computeEngineButton;
 
     @FindBy(xpath = "//input[@ng-model='listingCtrl.computeServer.quantity']")
     private WebElement numberOfInstancesField;
@@ -22,26 +19,14 @@ public class CalculatorPage extends AbstractPage {
     @FindBy(xpath = "//*[@ng-model='listingCtrl.computeServer.os']")
     private WebElement operationSystemContainer;
 
-    @FindBy(xpath = "//md-option[@value='free']")
-    private WebElement operationSystem;
-
     @FindBy(xpath = "//md-select[@placeholder='VM Class']")
     private WebElement machineClassContainer;
 
-    @FindBy(xpath = "//md-option[@value='regular']")
-    private WebElement machineClass;
-
     @FindBy(xpath = "//md-select[@placeholder='Series']")
-    private WebElement seriesContainer;
-
-    @FindBy(xpath = "//md-option[@ng-value='item.value' and @value='n1']")
-    private WebElement series;
+    private WebElement machineSeriesContainer;
 
     @FindBy(xpath = "//md-select[@placeholder='Instance type']")
     private WebElement machineTypeContainer;
-
-    @FindBy(xpath = "//md-option[contains(@value,'N1-STANDARD-8')]")
-    private WebElement machineType;
 
     @FindBy(xpath = "//md-checkbox[@ng-model='listingCtrl.computeServer.addGPUs']")
     private WebElement gpuCheckBox;
@@ -49,118 +34,110 @@ public class CalculatorPage extends AbstractPage {
     @FindBy(xpath = "//md-select[@placeholder='Number of GPUs']")
     private WebElement numberOfGpuContainer;
 
-    @FindBy(xpath = "//md-option[contains(@ng-repeat,'gpuType') and @value='1']")
-    private WebElement numberOfGpu;
-
     @FindBy(xpath = "//md-select[@placeholder='GPU type']")
     private WebElement gpuTypeContainer;
-
-    @FindBy(xpath = "//md-option[@value='NVIDIA_TESLA_V100']")
-    private WebElement gpuType;
 
     @FindBy(xpath = "//md-select[@ng-model='listingCtrl.computeServer.ssd']")
     private WebElement localSSDContainer;
 
-    @FindBy(xpath = "//md-option[contains(@ng-repeat,'dynamicSsd') and @value='2']")
-    private WebElement localSSD;
-
     @FindBy(xpath = "//md-select[contains(@ng-model,'computeServer.location')]")
     private WebElement dataCenterContainer;
-
-    @FindBy(xpath = "//md-option[contains(@ng-repeat,'dynamicSsd') and @value='2']")
-    private WebElement dataCenter;
 
     @FindBy(xpath = "//md-select[@ng-model='listingCtrl.computeServer.cud']")
     private WebElement committedUsageContainer;
 
-    @FindBy(xpath = "//md-option[@ng-value='1']/*[text()='1 Year']")
-    private WebElement committedUsage;
-
     @FindBy(xpath = "//button[contains(@ng-click,'ComputeEngineForm')]")
     private WebElement resultsButton;
 
-    public CalculatorPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
+    public CalculatorPage(WebDriver driver, WebDriverWait wait, JavascriptExecutor executor) {
+        super(driver, wait, executor);
     }
 
     public CalculatorPage frameSwitch() {
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(mainFrame));
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("myFrame"));
-        computeEngineButton.click();
         return this;
     }
 
-    public CalculatorPage selectChapter() {
-        computeEngineButton.click();
+    public CalculatorPage selectTab(Tabs tab) {
+        WebElement element = (driver.findElement(By.xpath(String.format(
+                "//div[@class='name ng-binding' and contains(text(),'%s')]", tab))));
+        jsClickElement(element);
         return this;
     }
 
-    public CalculatorPage setNumberOfInstances() {
-        numberOfInstancesField.sendKeys("4");
+    public CalculatorPage setNumberOfInstances(int numberOfInstances) {
+        numberOfInstancesField.sendKeys(String.valueOf(numberOfInstances));
         return this;
     }
 
-    public CalculatorPage setOperatingSystem() {
-        executor.executeScript("arguments[0].click(), arguments[1].click()",
-                operationSystemContainer, operationSystem);
+    public CalculatorPage setOperatingSystem(OperationSystem operationSystem) {
+        makeXpathLocatorAndSetValueFromDropDownList("//md-option[@value='%s']",
+                operationSystem, operationSystemContainer);
         return this;
     }
 
-    public CalculatorPage setMachineClass() {
-        executor.executeScript("arguments[0].click(), arguments[1].click()",
-                machineClassContainer, machineClass);
+    public CalculatorPage setMachineClass(MachineClass machineClass) {
+        makeXpathLocatorAndSetValueFromDropDownList("//md-option[@value='%s']",
+                machineClass, machineClassContainer);
         return this;
     }
 
-    public CalculatorPage setMachineSeries() {
-        executor.executeScript("arguments[0].click(), arguments[1].click()",
-                seriesContainer, series);
+    public CalculatorPage setMachineSeries(MachineSeries machineSeries) {
+        makeXpathLocatorAndSetValueFromDropDownList("//md-option[@ng-value='item.value' and @value='%s']",
+                machineSeries, machineSeriesContainer);
         return this;
     }
 
-    public CalculatorPage setMachineType() {
-        executor.executeScript("arguments[0].click(), arguments[1].click()",
-                machineTypeContainer, machineType);
+    public CalculatorPage setMachineType(MachineType machineType) {
+        makeXpathLocatorAndSetValueFromDropDownList("//md-option[contains(@value,'%s')]",
+                machineType, machineTypeContainer);
         return this;
     }
 
-    public CalculatorPage addGpus() {
-        executor.executeScript("arguments[0].click()", gpuCheckBox);
+    public CalculatorPage addGPU() {
+        jsClickElement(gpuCheckBox);
         return this;
     }
 
-    public CalculatorPage setNumberOfGpus() {
-        executor.executeScript("arguments[0].click(), arguments[1].click()",
-                numberOfGpuContainer, numberOfGpu);
+    public CalculatorPage setNumberOfGPU(NumberOfGPU numberOfGPU) {
+        makeXpathLocatorAndSetValueFromDropDownList("//md-option[contains(@ng-repeat,'gpuType') and @value='%s']",
+                numberOfGPU, numberOfGpuContainer);
         return this;
     }
 
-    public CalculatorPage setGpuType() {
-        executor.executeScript("arguments[0].click(), arguments[1].click()",
-                gpuTypeContainer, gpuType);
+    public CalculatorPage setGPUType(GPUType gpuType) {
+        makeXpathLocatorAndSetValueFromDropDownList("//div[contains(text(),'%s')]",
+                gpuType, gpuTypeContainer);
         return this;
     }
 
-    public CalculatorPage setNumberOfSSD() {
-        executor.executeScript("arguments[0].click(), arguments[1].click()",
-                localSSDContainer, localSSD);
+    public CalculatorPage setNumberOfSSD(NumberOfSSD numberOfSSD) {
+        makeXpathLocatorAndSetValueFromDropDownList("//md-option[contains(@ng-repeat,'dynamicSsd') and @value='%s']",
+                numberOfSSD, localSSDContainer);
         return this;
     }
 
-    public CalculatorPage setDataCenter() {
-        executor.executeScript("arguments[0].click(), arguments[1].click()",
-                dataCenterContainer, dataCenter);
+    public CalculatorPage setDataCenter(DataCenter dataCenter) {
+        makeXpathLocatorAndSetValueFromDropDownList("(//div[@class='md-text ng-binding' and contains(text(),'%s')])[1]",
+                dataCenter, dataCenterContainer);
         return this;
     }
 
-    public CalculatorPage setCommittedUsage() {
-        executor.executeScript("arguments[0].click(), arguments[1].click()",
-                committedUsageContainer, committedUsage);
+    public CalculatorPage setCommittedUsage(CommittedUsage committedUsage) {
+        makeXpathLocatorAndSetValueFromDropDownList("//md-option[@ng-value='1']/*[text()='%s']",
+                committedUsage, committedUsageContainer);
         return this;
     }
 
     public CalculatorResultsPage clickResultsButton() {
-        executor.executeScript("arguments[0].click()", resultsButton);
-        return new CalculatorResultsPage(driver, wait);
+        jsClickElement(resultsButton);
+        return new CalculatorResultsPage(driver, wait, executor);
+    }
+
+    public <E extends Enum<E>> CalculatorPage  makeXpathLocatorAndSetValueFromDropDownList (String path, E enumClass, WebElement container) {
+        WebElement element = driver.findElement(By.xpath(String.format(path, enumClass)));
+        jsClickElement(container, element);
+        return this;
     }
 }

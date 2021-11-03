@@ -1,5 +1,7 @@
 package hurtMePlenty.pages;
 
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -7,33 +9,31 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage extends AbstractPage {
-    private static final String HOMEPAGE_URL = "https://cloud.google.com/";
-    private static final String SEARCH_QUERY = "Google Cloud Platform Pricing Calculator\n";
-
     @FindBy(xpath = "//div[@class='devsite-searchbox']")
     private WebElement searchButton;
 
     @FindBy(name = "q")
     private WebElement searchInputField;
 
-    public HomePage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
+    public HomePage(WebDriver driver, WebDriverWait wait, JavascriptExecutor executor) {
+        super(driver, wait, executor);
     }
 
-    public HomePage openPage() {
-        driver.get(HOMEPAGE_URL);
+    public HomePage openPage(String homepageURL) {
+        driver.get(homepageURL);
         return this;
     }
 
     public HomePage clickSearchButton() {
         wait.until(ExpectedConditions.visibilityOf(searchButton));
-        searchButton.click();
+        jsScrollElementIntoViewAndClickIt(searchButton);
         return this;
     }
 
-    public SearchResultsPage inputSearchQuery() {
+    public SearchResultsPage inputSearchQuery(String searchQuery) {
         wait.until(ExpectedConditions.visibilityOf(searchInputField));
-        searchInputField.sendKeys(SEARCH_QUERY);
-        return new SearchResultsPage(driver, wait);
+        jsScrollElementIntoViewAndClickIt(searchInputField);
+        searchInputField.sendKeys(searchQuery, Keys.ENTER);
+        return new SearchResultsPage(driver, wait, executor);
     }
 }

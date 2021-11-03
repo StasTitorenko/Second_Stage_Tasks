@@ -1,5 +1,6 @@
 package hurtMePlenty.pages;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,13 +12,13 @@ public class CalculatorResultsPage extends AbstractPage {
     private WebElement numberOfInstances;
 
     @FindBy(xpath = "//div[@class='md-list-item-text ng-binding' and contains(text(),'Region:')]")
-    private WebElement region;
+    private WebElement dataCenter;
 
     @FindBy(xpath = "//div[@class='md-list-item-text ng-binding' and contains(text(),'Commitment term:')]")
     private WebElement commitmentTerm;
 
     @FindBy(xpath = "//div[@class='md-list-item-text ng-binding' and contains(text(),'VM class:')]")
-    private WebElement vmClass;
+    private WebElement machineClass;
 
     @FindBy(xpath = "//div[@class='md-list-item-text ng-binding cpc-cart-multiline flex' and contains(text(),'Instance type:')]")
     private WebElement instanceType;
@@ -34,24 +35,24 @@ public class CalculatorResultsPage extends AbstractPage {
     @FindBy(xpath = "//b[contains(text(),'Estimated Component Cost')]")
     private WebElement totalCost;
 
-    public CalculatorResultsPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
+    public CalculatorResultsPage(WebDriver driver, WebDriverWait wait, JavascriptExecutor executor) {
+        super(driver, wait, executor);
     }
 
     public String getNumberOfInstances() {
         return numberOfInstances.getText();
     }
 
-    public String getRegion() {
-        return region.getText();
+    public String getDataCenter() {
+        return dataCenter.getText();
     }
 
     public String getCommitmentTerm() {
         return commitmentTerm.getText();
     }
 
-    public String getVMClass() {
-        return vmClass.getText();
+    public String getMachineClass() {
+        return machineClass.getText();
     }
 
     public String getInstanceType() {
