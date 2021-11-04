@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
@@ -33,8 +34,8 @@ public class HurtMePlenty {
     private static final DataCenter DATA_CENTER = DataCenter.IOWA;
     private static final CommittedUsage COMMITTED_USAGE = CommittedUsage.ONE_YEAR;
 
-    @BeforeClass(alwaysRun = true)
-    public void browserSetup() {
+    @BeforeSuite(alwaysRun = true)
+    public void setupBrowser() {
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         driver.manage().window().maximize();
@@ -128,7 +129,7 @@ public class HurtMePlenty {
     }
 
     @AfterClass(alwaysRun = true)
-    public void browserClose() {
+    public void closeBrowser() {
         driver.quit();
         driver = null;
     }

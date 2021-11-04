@@ -1,5 +1,7 @@
-package hardcore.pages;
+package hardcore.pages.googleCloud;
 
+import hardcore.pages.AbstractPage;
+import hardcore.pages.tempMail.EmailPage;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -7,9 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 
-public class PricingCalculatorResultsPage extends AbstractPage {
-    JavascriptExecutor executor = (JavascriptExecutor) driver;
-
+public class CalculatorResultsPage extends AbstractPage {
     @FindBy(xpath = "//*[@id='cloud-site']/*/*")
     private WebElement mainFrame;
 
@@ -19,46 +19,48 @@ public class PricingCalculatorResultsPage extends AbstractPage {
     @FindBy(xpath = "//button[contains(text(),'Email Estimate')]")
     private WebElement emailEstimateButton;
 
-    @FindBy(xpath = "//input[@name='description' and @type='email']")
+    @FindBy(xpath = "//input[@ng-model='emailQuote.user.email']")
     private WebElement emailInputField;
 
     @FindBy(xpath = "//button[@aria-label='Send Email']")
     private WebElement emailSendButton;
 
-    public PricingCalculatorResultsPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
+    public CalculatorResultsPage(WebDriver driver, WebDriverWait wait, JavascriptExecutor executor) {
+        super(driver, wait, executor);
     }
 
     public String getTotalCost() {
         return totalCost.getText();
     }
 
-    public MailHomePage createNewEmailTabAndSwitchToIt() {
+
+    public EmailPage createNewEmailTab() {
         driver.switchTo().newWindow(WindowType.TAB);
-        return new MailHomePage(driver, wait);
+        return new EmailPage(driver, wait, executor);
     }
 
+
     public void SwitchToEmailTab() {
-        ArrayList<String> browserTabs = new ArrayList(driver.getWindowHandles());
+        ArrayList<String> browserTabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(browserTabs.get(1));
     }
 
-    public PricingCalculatorResultsPage clickEmailEstimateButton() {
+    public CalculatorResultsPage clickEmailEstimateButton() {
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(mainFrame));
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("myFrame"));
         wait.until(ExpectedConditions.elementToBeClickable(emailEstimateButton));
-        executor.executeScript("arguments[0].click()", emailEstimateButton);
+        jsClickElement(emailEstimateButton);
         return this;
     }
 
-    public PricingCalculatorResultsPage insertEmailAddressFromClipBoardToInputField() {
+    public CalculatorResultsPage insertEmailAddressFromClipboardToInputField() {
         emailInputField.sendKeys(Keys.LEFT_CONTROL, "v");
         return this;
     }
 
-    public PricingCalculatorResultsPage clickEmailSendButton() {
+    public CalculatorResultsPage clickEmailSendButton() {
         wait.until(ExpectedConditions.elementToBeClickable(emailSendButton));
-        executor.executeScript("arguments[0].click()", emailSendButton);
+        jsClickElement(emailSendButton);
         return this;
     }
 }
