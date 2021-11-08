@@ -20,12 +20,10 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult result) {
-        saveScreenShot();
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        saveScreenShot();
     }
 
     @Override
@@ -36,12 +34,10 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestSkipped(ITestResult result) {
-        saveScreenShot();
     }
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-        saveScreenShot();
     }
 
     @Override
@@ -51,12 +47,10 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onStart(ITestContext context) {
-        saveScreenShot();
     }
 
     @Override
     public void onFinish(ITestContext context) {
-        saveScreenShot();
     }
 
     public void saveScreenShot() {
@@ -68,7 +62,7 @@ public class TestListener implements ITestListener {
                     + getCurrentTimeAsString()
                     + ".png"));
         } catch (IOException e) {
-            logger.error("Не удалось сохранить снимок экрана" + e.getLocalizedMessage());
+            logger.error("Failed to save screenshot" + e.getLocalizedMessage());
         }
     }
 

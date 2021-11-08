@@ -1,31 +1,50 @@
 package framework.util;
 
+import framework.featuredCategories.*;
+
 public class FormatFields {
-    public String refactorTotalCost(String input) {
-        return input.substring(0, 16) + "Monthly "+ input.substring(16);
+
+    public String formatTotalCost(String totalCost) {
+        return totalCost.substring(0, 16) + "Monthly " + totalCost.substring(16);
     }
 
-    public String refactorNumberOfInstances(String input) {
-        return input + " x";
+    public String formatNumberOfInstances(String numberOfInstances) {
+        return numberOfInstances + " x";
     }
 
-    public String refactorMachineClass(String input) {
-        return "VM class: " + input;
+    public String formatMachineClass(MachineClass machineClass) {
+        return "VM class: " + machineClass;
     }
 
-    public String refactorMachineType(String input) {
-        return "Instance type: " + input.toLowerCase() + "\nCommitted Use Discount applied";
+    public String formatMachineType(MachineType machineType) {
+        return "Instance type: " + machineType.toString().toLowerCase() + "\nCommitted Use Discount applied";
     }
 
-    public String refactorDataCenter(String input) {
-        return "Region: " + input;
+    public String formatDataCenter(DataCenter dataCenter) {
+        return "Region: " + dataCenter;
     }
 
-    public String refactorCommittedUsage(String input) {
-        return "Commitment term: " + input;
+    public String formatCommittedUsage(CommittedUsage committedUsage) {
+        return "Commitment term: " + committedUsage;
     }
 
-    public String refactorOperationSystem(String input) {
-        return "Operating System / Software: " + (Character.toUpperCase(input.charAt(0)) + input.substring(1));
+    public String formatOperationSystem(OperationSystem operationSystem) {
+        String result;
+        if (operationSystem.toString().contains("free")) {
+            result = "Free";
+        } else {
+            result = "Paid";
+        }
+        return "Operating System / Software: " + result;
+    }
+
+    public String formatGPU(NumberOfGPU numberOfGPU, GPUType gpuType) {
+        return "GPU dies: " + numberOfGPU + " " + gpuType.toString().substring(0, 8)
+                + gpuType.toString().substring(8, 13).toUpperCase() + gpuType.toString().substring(13)
+                + "\nCommitted Use Discount applied";
+    }
+
+    public String formatSSD(NumberOfSSD numberOfSSD) {
+        return "Local SSD: " + numberOfSSD + "x375 GiB\nCommitted Use Discount applied";
     }
 }

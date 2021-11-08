@@ -17,6 +17,7 @@ public class CalculatorCreator {
     public static final String COMMITTED_USAGE = "testData.committedUsage";
 
     public static Calculator withCredentialsFromProperty() {
+        TestDataReader.setEnvironment();
         return new Calculator(
                 Tabs.valueOf(TestDataReader.getTestData(TAB)),
                 TestDataReader.getTestData(NUMBER_OF_INSTANCES),

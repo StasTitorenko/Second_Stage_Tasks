@@ -104,11 +104,18 @@ public class Calculator {
                 numberOfInstances.equals(that.numberOfInstances) &&
                 operationSystem == that.operationSystem &&
                 machineClass == that.machineClass &&
-                machineSeries == that.machineSeries && machineType == that.machineType && numberOfGPU == that.numberOfGPU && gpuType == that.gpuType && numberOfSSD == that.numberOfSSD && dataCenter == that.dataCenter && committedUsage == that.committedUsage;
+                machineSeries == that.machineSeries &&
+                machineType == that.machineType &&
+                numberOfGPU == that.numberOfGPU &&
+                gpuType == that.gpuType &&
+                numberOfSSD == that.numberOfSSD &&
+                dataCenter == that.dataCenter &&
+                committedUsage == that.committedUsage;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(tab, numberOfInstances, operationSystem, machineClass, machineSeries, machineType, numberOfGPU, gpuType, numberOfSSD, dataCenter, committedUsage);
+        return Objects.hash(tab, numberOfInstances, operationSystem, machineClass, machineSeries,
+                machineType, numberOfGPU, gpuType, numberOfSSD, dataCenter, committedUsage);
     }
 }
