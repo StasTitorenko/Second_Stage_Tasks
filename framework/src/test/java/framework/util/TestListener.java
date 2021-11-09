@@ -24,12 +24,12 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult result) {
+        saveScreenShot();
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
         saveScreenShot();
-
     }
 
     @Override
@@ -38,6 +38,7 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
+        saveScreenShot();
     }
 
     @Override
