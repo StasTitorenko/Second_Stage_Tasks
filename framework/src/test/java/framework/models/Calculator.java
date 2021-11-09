@@ -1,38 +1,18 @@
 package framework.models;
 
 import framework.featuredCategories.*;
-
 import java.util.Objects;
 
-public class Calculator {
-    private Tabs tab;
-    private String numberOfInstances;
-    private OperationSystem operationSystem;
-    private MachineClass machineClass;
-    private MachineSeries machineSeries;
-    private MachineType machineType;
-    private NumberOfGPU numberOfGPU;
-    private GPUType gpuType;
-    private NumberOfSSD numberOfSSD;
-    private DataCenter dataCenter;
-    private CommittedUsage committedUsage;
-
-    public Calculator(Tabs tab, String numberOfInstances, OperationSystem operationSystem,
-                      MachineClass machineClass, MachineSeries machineSeries, MachineType machineType,
-                      NumberOfGPU numberOfGPU, GPUType gpuType, NumberOfSSD numberOfSSD, DataCenter dataCenter,
-                      CommittedUsage committedUsage) {
-        this.tab = tab;
-        this.numberOfInstances = numberOfInstances;
-        this.operationSystem = operationSystem;
-        this.machineClass = machineClass;
-        this.machineSeries = machineSeries;
-        this.machineType = machineType;
-        this.numberOfGPU = numberOfGPU;
-        this.gpuType = gpuType;
-        this.numberOfSSD = numberOfSSD;
-        this.dataCenter = dataCenter;
-        this.committedUsage = committedUsage;
-    }
+public record Calculator(Tabs tab, String numberOfInstances,
+                         OperationSystem operationSystem,
+                         MachineClass machineClass,
+                         MachineSeries machineSeries,
+                         MachineType machineType,
+                         NumberOfGPU numberOfGPU,
+                         GPUType gpuType,
+                         NumberOfSSD numberOfSSD,
+                         DataCenter dataCenter,
+                         CommittedUsage committedUsage) {
 
     public Tabs getTab() {
         return tab;

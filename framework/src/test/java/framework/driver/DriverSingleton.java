@@ -17,30 +17,25 @@ public class DriverSingleton {
     public static WebDriver getDriver() {
         if (driver == null) {
             switch (System.getProperty("browser")) {
-                case "firefox": {
+                case "firefox" -> {
                     WebDriverManager.firefoxdriver().setup();
                     driver = new FirefoxDriver();
-                    break;
                 }
-                case "opera": {
+                case "opera" -> {
                     WebDriverManager.operadriver().setup();
                     driver = new OperaDriver();
-                    break;
                 }
-                case "edge": {
+                case "edge" -> {
                     WebDriverManager.edgedriver().setup();
                     driver = new EdgeDriver();
-                    break;
                 }
-                case "ie": {
+                case "ie" -> {
                     WebDriverManager.iedriver().setup();
                     driver = new InternetExplorerDriver();
-                    break;
                 }
-                default: {
+                default -> {
                     WebDriverManager.chromedriver().setup();
                     driver = new ChromeDriver();
-                    break;
                 }
             }
             driver.manage().window().maximize();

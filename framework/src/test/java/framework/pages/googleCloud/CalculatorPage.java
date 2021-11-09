@@ -13,7 +13,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class CalculatorPage extends AbstractPage {
-    private Calculator calculator = CalculatorCreator.withCredentialsFromProperty();
+    private final Calculator calculator = CalculatorCreator.withCredentialsFromProperty();
+
     @FindBy(xpath = "//*[@id='cloud-site']/*/*")
     private WebElement mainFrame;
 
@@ -59,9 +60,9 @@ public class CalculatorPage extends AbstractPage {
 
     public CalculatorPage frameSwitch() {
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(mainFrame));
-        logger.info("Frame №1 switch - success");
+        logger.info("Frame 'mainFrame' switch - success");
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("myFrame"));
-        logger.info("Frame №2 switch - success");
+        logger.info("Frame 'myFrame' switch - success");
         return this;
     }
 
