@@ -29,7 +29,7 @@ public class CommonConditions {
     @BeforeClass(alwaysRun = true)
     public void setupBrowser() {
         driver = DriverSingleton.getDriver();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         executor = (JavascriptExecutor) driver;
     }
 
